@@ -1,7 +1,6 @@
 #-*- coding:utf-8 -*-
 import pandas as pd
 import os, time
-
 from PIL import ImageDraw, Image, ImageFont
 
 FILLING = 500
@@ -24,7 +23,6 @@ EXCEL_PATH = ROOT_FOLDER + "/course_record.xlsx"
 SHEET_NAME = 'sheet2'
 # generate student by phase
 PHASE=2
-
 
 class CourseManage:
     # initialize
