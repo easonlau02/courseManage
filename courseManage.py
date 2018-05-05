@@ -26,7 +26,7 @@ SHEET_NAME = 'sheet2'
 PHASE=2
 
 
-class ImageProcess:
+class CourseManage:
     def __init__(self,excel_path,sheet_name,phase):
         self.phase = phase
         self.sheet_name = sheet_name
@@ -111,5 +111,5 @@ class ImageProcess:
         print('===========End to generate image with student information=========')
                 
 
-imgp=ImageProcess(EXCEL_PATH,sheet_name=SHEET_NAME,phase=PHASE)
+imgp=CourseManage(EXCEL_PATH,sheet_name=SHEET_NAME,phase=PHASE)
 imgp.process()
