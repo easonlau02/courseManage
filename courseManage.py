@@ -19,7 +19,7 @@ FONT_SIZE=95
 GLOBAL_D_WIDTH, GLOBAL_D_HEIGHT = 230,145
 
 # excel
-EXCEL_PATH = ROOT_FOLDER+"/course_record.xlsx"
+EXCEL_PATH = ROOT_FOLDER + "/course_record.xlsx"
 # excel sheet to load by sheet name
 SHEET_NAME = 'sheet2'
 # generate student by phase
@@ -27,6 +27,7 @@ PHASE=2
 
 
 class CourseManage:
+    # initialize
     def __init__(self,excel_path,sheet_name,phase):
         self.phase = phase
         self.sheet_name = sheet_name
@@ -50,7 +51,7 @@ class CourseManage:
             return self.df.columns
         else:
             return []
-
+    # get new folder for pic generating
     def getFolderWithDate(self):
         currentDate = time.strftime('%Y-%m-%d',time.localtime(time.time()))
         folderName = currentDate
@@ -62,7 +63,18 @@ class CourseManage:
         fullPath = GENERATED_ROOT+folderName + '/'
         os.mkdir(fullPath)
         return fullPath
+    
+    # get template
+    def getImageTemplateBySex(self, sex):
+        image_template = IMAGE_PATH_BOY
+        if sex is not None:
+            if sex == 1:
+                image_template = IMAGE_PATH_BOY
+            else:
+                image_template = IMAGE_PATH_GIRL
+        return image_template
 
+    # process pic with student informaion based on excel EXCEL_PATH
     def process(self):
         print('===========Start to generate image with student information=========')
         fullPath = self.getFolderWithDate()
@@ -72,16 +84,14 @@ class CourseManage:
             size,_ = dataSet.shape
             print('Total students at Phase \''+str(self.phase)+'\' : '+str(size))
             # open Image
-            image_template = IMAGE_PATH_BOY
+            image_template = ''
 
             for _, rowData in dataSet.iterrows():
                 d_width, d_height = GLOBAL_D_WIDTH,GLOBAL_D_HEIGHT
-                sex = rowData['Sex']
-                if sex is not None:
-                    if sex == 1:
-                        image_template = IMAGE_PATH_BOY
-                    else:
-                        image_template = IMAGE_PATH_GIRL
+                
+                # Get template
+                image_template = self.getImageTemplateBySex(rowData['Sex'])
+                
                 img = Image.open(image_template)
                 draw = ImageDraw.Draw(img)
 
@@ -109,7 +119,6 @@ class CourseManage:
             print('Total students at Phase '+str(self.phase)+' : '+str(0))
             print('No result ouput.')
         print('===========End to generate image with student information=========')
-                
 
 imgp=CourseManage(EXCEL_PATH,sheet_name=SHEET_NAME,phase=PHASE)
 imgp.process()
