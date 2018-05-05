@@ -24,7 +24,7 @@ python courseManage.py
 5. Below is the output
 ```
 ===========Start to generate image with student information=========
-Total students at Phase '2' : 4
+Total students at Phase '1' : 4
 Please check ouput results in Path : '~/imageProcess/generated/2018-05-06/'
 ===========End to generate image with student information=========
 ```
