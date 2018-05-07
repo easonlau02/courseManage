@@ -1,7 +1,9 @@
 #-*- coding:utf-8 -*-
+import os
+import time
+
 import pandas as pd
-import os, time
-from PIL import ImageDraw, Image, ImageFont
+from PIL import Image, ImageDraw, ImageFont
 
 FILLING = 500
 COLOR = 120,0,0
@@ -33,6 +35,20 @@ class CourseManage:
         #read course_record
         self.df = pd.read_excel(excel_path, sheet_name=sheet_name)
     
+    # get font
+    def getFont(self):
+        import platform as pf
+        sysver = pf.system()
+
+        if sysver is None:
+            return FONT_STYLE
+        if sysver.upper() == 'DARWIN':
+            return 'System/Library/Fonts/PingFang.ttc'
+        elif sysver.upper() == 'LINUX':
+            return ''
+        elif sysver.upper() == 'WINDOWS':
+            return ''
+
     # geta printable dataset with params @phase
     def getDataSet(self):
         if self.df.empty:
@@ -43,7 +59,7 @@ class CourseManage:
         else:
             return self.df
 
-    # get default header from xlsx
+    # get default header from xlsxr
     def getHeader(self):
         if self.df.empty == False:
             return self.df.columns
@@ -76,7 +92,8 @@ class CourseManage:
     def process(self):
         print('===========Start to generate image with student information=========')
         fullPath = self.getFolderWithDate()
-        font = ImageFont.truetype(FONT_STYLE,FONT_SIZE)
+        print(self.getFont())
+        font = ImageFont.truetype(self.getFont(),FONT_SIZE)
         dataSet = self.getDataSet()
         if hasattr(dataSet,'empty') and dataSet.empty == False:
             size,_ = dataSet.shape
