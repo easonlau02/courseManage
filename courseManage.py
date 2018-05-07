@@ -113,12 +113,13 @@ class CourseManage:
                 draw = ImageDraw.Draw(img)
 
                 for k,v in rowData.items():
+                    if k == 'Phase' or k == 'Sex':
+                        continue
                     if type(k) != int:
                         k = k.encode('utf-8')
                     if type(v) != int:
                         v = v.encode('utf-8')
-                    if k == 'Phase' or k == 'Sex':
-                        continue
+                    
                     c_width = d_width
                     # inset Key
                     draw.text((c_width,d_height),  k.decode('utf-8') if type(k) != int else str(k), COLOR, font=font)
