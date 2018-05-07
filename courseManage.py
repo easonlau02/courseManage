@@ -11,7 +11,9 @@ ROOT_FOLDER = os.getcwd()
 IMAGE_PATH_BOY = ROOT_FOLDER + "/template/template_boy.jpeg"
 IMAGE_PATH_GIRL = ROOT_FOLDER + "/template/template_girl.jpeg"
 # FONT_STYLE="/System/Library/Fonts/Monaco.dfont"
-FONT_STYLE = "/System/Library/Fonts/PingFang.ttc"
+FONT_STYLE_MAC = "/System/Library/Fonts/PingFang.ttc"
+FONT_STYLE_WIN = ''
+FONT_STYLE_LINUX = ''
 GENERATED_ROOT = ROOT_FOLDER+'/generated/'
 V_OFFSET = 140
 H_OFFSET = 500
@@ -41,13 +43,13 @@ class CourseManage:
         sysver = pf.system()
 
         if sysver is None:
-            return FONT_STYLE
+            return FONT_STYLE_MAC
         if sysver.upper() == 'DARWIN':
-            return 'System/Library/Fonts/PingFang.ttc'
+            return FONT_STYLE_MAC
         elif sysver.upper() == 'LINUX':
-            return ''
+            return FONT_STYLE_LINUX
         elif sysver.upper() == 'WINDOWS':
-            return ''
+            return FONT_STYLE_WIN
 
     # geta printable dataset with params @phase
     def getDataSet(self):
