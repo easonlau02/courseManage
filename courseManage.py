@@ -115,17 +115,17 @@ class CourseManage:
                 for k,v in rowData.items():
                     if k == 'Phase' or k == 'Sex':
                         continue
-                    if type(k) != int:
+                    if type(k) != int and type(v) != float:
                         k = k.encode('utf-8')
-                    if type(v) != int:
+                    if type(v) != int and type(v) != float:
                         v = v.encode('utf-8')
                     
                     c_width = d_width
                     # inset Key
-                    draw.text((c_width,d_height),  k.decode('utf-8') if type(k) != int else str(k), COLOR, font=font)
+                    draw.text((c_width,d_height),  k.decode('utf-8') if k and type(k) != int and type(k) != float else str(k), COLOR, font=font)
                     # inset value
                     c_width += H_OFFSET
-                    draw.text((c_width, d_height), v.decode('utf-8') if type(v) != int else str(v)  , COLOR, font=font)
+                    draw.text((c_width, d_height), v.decode('utf-8') if v and type(v) != int and type(v) != float else str(v)  , COLOR, font=font)
                     d_height += V_OFFSET
 
                 # img.show()
