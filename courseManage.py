@@ -113,10 +113,10 @@ class CourseManage:
                 img = Image.open(image_template)
                 draw = ImageDraw.Draw(img)
 
+                rowData[pd.isna(rowData)] = ''
+                rowData[pd.isnull(rowData)] = ''
+
                 for k,v in rowData.items():
-                    if type(v) == float and isnan(v):
-                        v = ''
-                        
                     if k == 'Phase' or k == 'Sex':
                         continue
                     if type(k) != int and type(v) != float:
