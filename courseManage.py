@@ -4,6 +4,7 @@ import time
 
 import pandas as pd
 from PIL import Image, ImageDraw, ImageFont
+from math import isnan
 
 FILLING = 500
 COLOR = 120,0,0
@@ -113,6 +114,9 @@ class CourseManage:
                 draw = ImageDraw.Draw(img)
 
                 for k,v in rowData.items():
+                    if type(v) == float and isnan(v):
+                        v = ''
+                        
                     if k == 'Phase' or k == 'Sex':
                         continue
                     if type(k) != int and type(v) != float:
