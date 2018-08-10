@@ -1,5 +1,6 @@
 #-*- coding:utf-8 -*-
 import os
+import ConfigParser
 import time
 
 import pandas as pd
@@ -25,9 +26,18 @@ GLOBAL_D_WIDTH, GLOBAL_D_HEIGHT = 230,145
 # excel
 EXCEL_PATH = ROOT_FOLDER + "/course_record.xlsx"
 # excel sheet to load by sheet name
-SHEET_NAME = 'sheet2'
+# SHEET_NAME = 'sheet2'
 # generate student by phase
-PHASE=2
+# PHASE=8
+
+def getConfig(section, key):
+    config = ConfigParser.ConfigParser()
+    path = os.path.split(os.path.realpath(__file__))[0] + '/properties.conf'
+    config.read(path)
+    return config.get(section, key)
+
+SHEET_NAME = getConfig('EXCEL','SHEET_NAME')
+PHASE = int(getConfig('EXCEL', 'PHASE'))
 
 class CourseManage:
     # initialize
