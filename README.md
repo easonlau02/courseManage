@@ -9,7 +9,7 @@ pip install -r requirement_macos.txt
 2. Modify record under file `course_record.xlsx`
 ![](https://github.com/easonlau02/courseManage/blob/master/temp/excel_template.png "excel_template.png")
 
-3. for example, if you wanna generate above record, need to change below config in file `courceManage.py`
+3. for example, if you wanna generate above record, need to change below config in file `properties.conf`
 ```
 # generate student by phase
 PHASE = 1
