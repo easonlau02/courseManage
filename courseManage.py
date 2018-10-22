@@ -144,7 +144,7 @@ class CourseManage:
 
                 # img.show()
                 _, extension = os.path.splitext(image_template)
-                new_filename = rowData[rowData.keys()[2]]
+                new_filename = rowData[rowData.keys()[2]]+time.strftime('%Y-%m-%d-%H%M%S',time.localtime(time.time()))
                 img.save(fullPath+new_filename+extension)
             print('Please check ouput results in Path : \''+fullPath+'\'')
         else:
