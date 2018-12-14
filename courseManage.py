@@ -139,7 +139,7 @@ class CourseManage:
                     draw.text((c_width,d_height),  k.decode('utf-8') if k and type(k) != int and type(k) != float else str(k), COLOR, font=font)
                     # inset value
                     c_width += H_OFFSET
-                    draw.text((c_width, d_height), v.decode('utf-8') if v and type(v) != int and type(v) != float else str(v)  , COLOR, font=font)
+                    draw.text((c_width, d_height), self.formatDate(v).decode('utf-8') if v and type(v) != int and type(v) != float else self.formatDate(str(v))  , COLOR, font=font)
                     d_height += V_OFFSET
 
                 # img.show()
@@ -151,6 +151,25 @@ class CourseManage:
             print('Total students at Phase '+str(self.phase)+' : '+str(0))
             print('No result ouput.')
         print('===========End to generate image with student information=========')
+    def formatDate(self,value):
+        import re
+        pattern = re.compile('([0-9]{4}\.[0-9]{1,2}\.[0-9]{1,2})(\(.*?\))')
+        matches = pattern.match(value)
+        if matches:
+            import time
+            struct_time = value
+            try:
+                struct_time = time.strftime("%Y.%m.%d",time.strptime(matches.group(1),"%Y.%m.%d"))
+                struct_time = struct_time.ljust(12)
+            except ValueError as valueError:
+                return struct_time
+            else:
+                if len(matches.groups()) >= 2:
+                    struct_time += matches.group(2)
+                    return struct_time
+        return value
+
+
 
 imgp=CourseManage(EXCEL_PATH,sheet_name=SHEET_NAME,phase=PHASE)
 imgp.process()
